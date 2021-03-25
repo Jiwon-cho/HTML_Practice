@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>목록 관련 태그</title>
+</head>
+<body>
+    <h1>순서없는 목록태그 사용하기</h1>
+    <p>ul태그는 내부에 li태그로 목록의 내용을 표시함</p>
+    <ul>
+        <li><h2>html</h2></li>
+        <li>css</li>
+        <li>javascript</li>
+        <li>jquery</li>
+    </ul>
+    <p>ul태그에 다시 ul태그 넣기</p>
+    <ul>
+        <li>java</li>
+        <li>oracle</li>
+        <li>frontend
+            <ul>
+                <li>html</li>
+                <li>css</li>
+                <li>javascript</li>
+                <li>jquery</li>
+                
+            </ul>
+        </li>
+        <li>backend</li>
+    </ul>
+    <p>ul태그는 메뉴바를 만들 때 사용</p>
+
+    <h1>순서가 있는 목록태그: ol</h1>
+    <ol>
+        <li>html</li>
+        <li>css</li>
+        <li>javascript</li>
+        <li>jquery</li>
+    </ol>
+    <p>
+        ol태그 속성을 설정하면됨
+        type="a||A"(영문자)
+        type="I||i"(로마자)
+    </p>
+    <ol type="a">
+        <li>html</li>
+        <li>css</li>
+        <li>javascript</li>
+        <li>jquery</li>
+    </ol>
+    <ol type="i">
+        <li>html</li>
+        <li>css</li>
+        <li>javascript</li>
+        <li>jquery</li>
+    </ol>
+
+    <p>
+        start속성을 통해 시작 번호를 변경할 수 있음
+    </p>
+    <ol start="10">
+        <li>html</li>
+        <li>css</li>
+        <li>javascript</li>
+        <li>jquery</li>
+    </ol>
+    <ol type="a" start="5">
+        <li>html</li>
+        <li>css</li>
+        <li>javascript</li>
+        <li>jquery</li>
+    </ol>
+    <ol type="i" reversed start="10">
+        <li>html</li>
+        <li>css</li>
+        <li>javascript</li>
+        <li>jquery</li>
+    </ol>
+<h1>메뉴바 만들기</h1>
+    <nav>
+        <ul>
+        <li>main</li>
+        <li>board</li>
+        <li>gallery</li>
+        <li>warehouse</li>
+        </ul>
+    </nav>
+
+    <style>
+        nav>ul>li{
+            display:inline;
+            font-size:40px;
+            color:lightgreen;
+            font-weight:bold;
+            margin-right:30px;
+        }
+        nav>ul>li:hover{
+            color:lime;
+        }
+    </style>
+    
+    <h2>정의 리스트 태그 활용하기</h2>
+    <p>
+        dl태그안에 dt와 dd태그를 사용
+        dt: 정의 제목
+        dd: 정의 내용
+    </p>
+    <dl>
+        <dt><h3>apple</h3></dt>
+        <dd>명, 사과</dd>
+    </dl>
+</body>
+</html>

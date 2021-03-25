@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테이블 태그</title>
+</head>
+<body>
+    <h1>기본테이블 만들기</h1>
+    <table border="1">
+        <tr>
+            <td>1행 1열</td>
+            <td>1행 2열</td>
+        </tr>
+        <tr>
+            <td>2행 1열</td>
+            <td>2행 2열</td>
+        </tr>
+    </table>
+    <h1>4행4열 테이블 만들기</h1>
+    <table border="1" width="300" height="300">
+        <tr>
+            <td>1행 1열</td>
+            <td>1행 2열</td>
+            <td>1행 3열</td>
+            <td>1행 4열</td>
+        </tr>
+        <tr>
+            <td>2행 1열</td>
+            <td>2행 2열</td>
+            <td>2행 3열</td>
+            <td>2행 4열</td>
+        </tr>
+        <tr>
+            <td>3행 1열</td>
+            <td>3행 2열</td>
+            <td>3행 3열</td>
+            <td>3행 4열</td>
+        </tr>
+        <tr>
+            <td>4행 1열</td>
+            <td>4행 2열</td>
+            <td>4행 3열</td>
+            <td>4행 4열</td>
+        </tr>
+    </table>
+
+    <!-- (tr>td*4)*4  이렇게해도 됨-->
+
+    <p>테이블 주로 db에 있는 데이터를 가져와 출력할때</p>
+    <table border="1" width="300" height="300">
+        
+        <caption>&lt;<b>21년도 학생정보<b>&gt;</caption>
+        <!-- 캡션은 위에만// 위치 바꾸려면 css로 조작해야한다. -->
+        <tr>
+            <th>이름</th>
+            <th>나이</th>
+            <th>성별</th>
+            <!-- <td>이름</td>
+            <td>나이</td>
+            <td>성별</td> -->
+        </tr>
+        <tr>
+            <td align="center">유병승</td>
+            <td align="right">19</td>
+            <td valign="bottom">남</td>
+            <!--속성값으로 위치 조정 되지만 css로 조작 권장-->
+        </tr>
+        <tr>
+            <td>정찬</td>
+            <td>26</td>
+            <td>남</td>
+        </tr>
+        
+    </table>
+    
+    <h2>figure태그 이용해서 캡션 달기</h2>
+    <firgure> 
+        <figcaption>21년 학생정보</figcaption>
+        <table border="1" width="300" height="300">
+            <caption>&lt;<b>21년도 학생정보<b>&gt;</caption>
+            <tr>
+                <th>이름</th>
+                <th>나이</th>
+                <th>성별</th>
+            
+            </tr>
+            <tr>
+                <td align="center">유병승</td>
+                <td align="right">19</td>
+                <td valign="bottom">남</td>
+              
+            </tr>
+            <tr>
+                <td>정찬</td>
+                <td>26</td>
+                <td>남</td>
+            </tr>
+        
+    </table>
+    <figcaption>21년 학생정보</figcaption>
+</firgure>
+</body>
+</html>

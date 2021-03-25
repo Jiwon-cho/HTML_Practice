@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+    <head>
+        <!--
+            페이지에 대한 주요정보를 설정
+            외부에서 불러올 파일 지정, SCRIPT, CSS에 대한 설정
+            페이지 작성환경,저작자,타이틀 등 작성
+        -->
+        <!-- meta 태그 이용하기 -->
+        <!-- 페이지 기본 언어설정 -->
+        <meta http-qeuiv="content-language" content="ko"/>
+        <!-- 페이지 형식,문자형식을지정. -->
+        <meta http-quiv="content-type" content="test/html";
+        charset=UTF-8"/>
+        <!-- 문자열 인코딩-->
+        <meta charset="UTF-8"> 
+        <!-- 단일태그는 안닫아줘도 됨 근데 닫는 연습핮자 -->
+        <!-- 페이지를 자동으로 이동하는 옵션!-->
+        <!-- <meta http-equiv="refresh" content="3;http://www.iei.or.kr"/> -->
+        <!-- meta 태그 name 속성 ->페이지에 대한 기본정보 설정-->
+        <meta name="application-name" content="html구조"/>
+        <meta name="author" content="bsYoo"/>
+        <meta name="description" content="html에 대한 주요구조"/>
+        <meta name="generator" content="vscode"/>
+        <meta name="keywords" content="web, thml, thml5, html 구조"/>
+
+        <meta name="viewport" content="width=device-width,
+        initial-scale=1.0"/>
+
+        <!--
+            페이지의 제목을 설정하는 태그
+            title 태그
+        -->
+
+        <title>나의 첫 html페이지</title>
+
+        <!-- 
+            외부에 있는 파일(css, icon)을 페이지로 불러오는 태그
+            link 태그
+        -->
+        <link rel="stylesheet" type="text/css" href="css/sample.css"/>
+    
+        <!-- 파비콘 설정하기-->
+        <link rel="icon" type="image/x-icon" href="https://iei.or.kr/khfavicon.ico"/>
+        
+        <!--태그들의 모양을 꾸며주는 태그-->
+        <!--글자크기,테주리 설정, 글꼴,배경색, 글자굵기..-->
+        <!-- 꼭 head 태그 내부에 있어야 하는건 아니다.-->
+        <!-- <style>
+                p{
+                    font-size:20px;
+                    color:aquamarine;
+                    font-weight:bold;
+                    
+                }
+        통상 헤드에 넣긴함/ 위치는 상관 X
+        대신 위에 놓으면 먼저 읽기 때문에 설계 따라
+        어디다 놓을지 선택해야됨
+            </style> -->
+        <!-- <script>
+            alert('알림창!');
+        </script> -->
+    
+    <!-- 페이지의 default경로를 변경할 수 있다.
+        base 태그-->
+   
+    
+    
+    
+    <base href="http://www.naver.com"/>
+    <script>
+        alert('알림창!');
+    </script>
+    <script src="js/sample.js"></script>
+  
+    </head>
+    <body>
+        <!-- <script>
+            alert('알림창!');
+        </script> -->
+        <!-- 이렇게 body에 넣어도됨-->
+        <!-- <script src="js/sample.js"></script> -->
+
+        
+        <style>
+            p{
+                font-size:20px;
+                color:aquamarine;
+                font-weight:bold;
+                
+            }
+    </style>
+            <h1>HTML의 세계에 오신것을 환영합니다.</h1>
+            <h1>3초 후 이동된 페이지로 이동합니다.</h1>
+            <p>css 적용 태그입니다.</p>
+            <a href="test.do">base연결</a>
+    </body>
+    <!-- <script>
+        alert('알림창!');
+    </script> -->
+ 
+</html>
