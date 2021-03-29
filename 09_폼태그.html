@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form 태그</title>
+</head>
+<body>
+    <h1>Form 태그에 대해 알아보자</h1>
+    <p>
+        form태그는 자식 태그로 갖고잇는 input 태그들의 값을 특정 
+        서버에 전송해주는 태그
+        주요속성: method, action
+        method: 전송방식을 결정(get,post)
+        action: 서비스를 요청할 주소
+    </p>
+    <h2>get/post 방식 전송하기</h2>
+    <h4>get 방식으로 전송하기</h4>
+    <form action="08_하이퍼링크.html" method="get">
+        <input type="text" name="id" placeholder="아이디 입력">
+        <input type="password" name="password" placeholder="패스워드 입력"><br>
+        <input type="submit" value="로그인">
+    </form>
+    <h4>post 방식으로 전송하기</h4>
+    <form action="08_하이퍼링크.html" method="post">
+        <input type="text" name="id" placeholder="아이디 입력">
+        <input type="password" name="password" placeholder="패스워드 입력"><br>
+        <input type="submit" value="로그인">
+    </form>
+    <h4>method속성은 기본값이 get</h4>
+    <form action="08_하이퍼링크.html">
+        <input type="text" name="id" placeholder="아이디 입력">
+        <input type="password" name="password" placeholder="패스워드 입력"><br>
+        <input type="submit" value="로그인">
+    </form>
+    <a href="https://www.google.com/search?q=오늘끝">구글 검색</a>
+    <a href="https://www.youtube.com/results?search_query=+놀면뭐하니">유튜브 검색</a>
+</body>
+</html>
