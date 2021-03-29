@@ -1,2 +1,2 @@
 # HTML_Practice
-The repository where practicing to get used to HTML
+The repository where practicing for HTML
