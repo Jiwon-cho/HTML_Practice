@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>텍스트 스타일 적용하기</title>
+</head>
+<body>
+    <h1>글자색 변경하기</h1>
+    <p class="color">글자색 변경하기</p>
+    <style>
+        .color{
+            /* color:rgb(107,102,255); */
+            color:#750028;
+        }
+    </style>
+
+    <h2>text-decoration</h2>
+    <p>문장에 윗줄, 아랫줄, 삭선, 줄없애기</p>
+    <h3 class="uderline">아랫줄</h3>
+    <h3 class="overline">윗줄</h3>
+    <h3 class="deleteline">삭선</h3>
+    <a href="">밑줄 없애기</a>
+    <a href="">네이버</a>
+    <style>
+        .underline{
+            text-decoration: underline;
+        }
+        .overline{
+            text-decoration: overline;
+        }
+        .deleteline{
+            text-decoration: line-through;
+        }
+        a{
+            text-decoration: none;
+            color:lime;
+            font-size:30px;
+        }
+        a:hover{
+            text-decoration: overline;
+            color:limegreen
+        }
+    </style> 
+    
+    <h3>text-transform</h3>
+    <p>영문을 변경해주는 속성</p>
+    <h2 class="text deleteline">hello world</h2>
+    <!--클래스는 중복 가능-->
+    <style>
+        .text{
+            /* text-transform: lowercase; */
+            /* text-transform:uppercase; */
+            text-transform: capitalize;
+        }
+    </style>
+
+    <h2>text-shadow</h2>
+    <p>
+        문자열에 그림자 효과 주기
+        text-shadow: 가로 세로 번짐 색상
+    </p>
+    <h1 class="shadow">Rclass 화이팅</h1>
+    <style>
+        .shadow{
+            text-shadow:5px 5px 3px red,7px 7px 3px orange;
+        /* <!--  - 7px 같이 하면 반대로 그려짐  --> */
+        }
+    </style>
+
+    <h3>white-space</h3>
+    <p>
+        공백에 대한 설정하는 속성(띄어쓰기, 개행, 탭)
+    </p>
+    <div id="container" class="nowrap">
+        엄마가 섬그늘에        굴   따러가면 아기가 혼자남아 집을 보다가
+        파도가 들려주는 자장 노래에
+    </div>
+    <!-- 신경안씀 -->
+    <div id="container" class="pre">
+        엄마가 섬그늘에        굴   따러가면 아기가 혼자남아 집을 보다가
+        파도가 들려주는 자장 노래에
+    </div>  
+    <!-- 개행만 표시 -->
+    <div id="container" class="preline">
+        엄마가 섬그늘에        굴   따러가면 아기가 혼자남아 집을 보다가
+        파도가 들려주는 자장 노래에
+    </div>
+    <!-- 개행,띄어쓰기 표시 -->
+    <div id="container" class="prewrap">
+        엄마가 섬그늘에        굴   따러가면 아기가 혼자남아 집을 보다가
+        파도가 들려주는 자장 노래에
+        <!-- 띄어쓰기 다 표시 -->
+    </div>
+    <style>
+        .prewrap{
+            white-space: pre-wrap;
+        }
+        .nowrap{
+            white-space:nowrap;
+        }
+
+        .pre{
+            white-space: pre;
+        }
+        .preline{
+            white-space: pre-line;
+        }
+        #container{
+            width:300px;
+            height: 300px;
+            border:1px red solid;
+        }
+    </style>
+
+    <h2>letter-spacing / word-spacing</h2>
+    <p>나라말싸미 듕긕에 바라할세 호롤로</p>
+    <p class="letter">나라말싸미 듕긕에 바라할세 호롤로</p>
+    <p class="word">나라말싸미 듕긕에 바라할세 호롤로</p>
+    <style>
+        .letter{
+            letter-spacing: 20px;
+        }
+        .word{
+            word-spacing: 20px;
+        }
+    </style>
+
+
+</body>
+</html>

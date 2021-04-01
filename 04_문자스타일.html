@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문자스타일</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dokdo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Single+Day&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h2>글꼴 스타일 적용하기</h2>
+    <P>
+        글꼴을 선정하는 기준은 OS에 있는 값을 기준으로 설정이 가능하다.
+        그래서 다중선택이 가능하고 모두 없을 경우에는 브라우저가 기본으로 
+        사용하는 글꼴이 적용됨.
+    </P>
+    <div id="container">
+        <h2>글꼴적용하기</h2>
+        <p>
+            이것도 글꼴을 적용해보자
+        </p>
+        
+    </div>
+    <p class="dokdo">웹폰트를 이용하면 다양한 폰트를 구현할 수 잇다.</p>
+    <h3 class="single"> 여러 가지 다양한 글꼴</h3>
+    <style>
+        .single{
+            font-family: "Single Day";
+        }
+        .dokdo{
+            font-family: "Dokdo";
+        }
+        div#container>h2{
+            font-family: "궁서체";
+        }
+        div#container>p{
+            font-family: "고딕체","궁서체";
+        }
+    </style>
+
+    <h2>글꼴 크기 정하기</h2>
+    <p>기본글자 크기의 문장</p>
+    <p class="staticSize">안녕하세요 30px 입니다.</p>
+    
+    <div id="font-test">
+        <p class="relativeSize">안녕하세요 2em입니다.</p>    
+    </div>
+    <p>기본굵기</p>
+    <p classs="bold">bold 굵기</p>
+    <p class="bolder">bolder 굵기</p>
+    <p class="lighter">lighter굵기</p>
+    <p class="weightsu">어느정도인가</p>
+
+    <style>
+        /* body{
+            font-size:10px;
+        } */
+        /* html{
+            font-size: 40px;
+        } */
+        div#font-test{
+            font-size: 20px;
+        }
+        .staticSize{
+            font-size:30px;
+        }
+        .relativeSize{
+            /* font-size:2em;바로 위부모 크기에 2배-body가 윗부모 */
+            font-size:2rm; /*최상위 - html 로 감*/
+        }
+        .bold{
+            font-weight: bold;
+        }
+        .bolder{
+            font-weight: bolder;
+        }
+        .lighter{
+            font-weight: lighter;
+        }
+
+        .weightsu{
+            font-weight:700;
+        }
+
+        .variant{
+            font-variant:small-caps;
+        }
+        .ital{
+            /* font-style: italic; */
+            font-style: oblique;
+        }
+
+    </style>
+    <p class="variant">회원등급(member vip)</p>
+    <p class="ital">문자가 기울어짐</p>
+
+    <p class="fontall">전체를 한번에적용하기 good</p>
+    <style>
+        .fontall{
+            font:italic small-caps bolder 50px "Single Day";
+        }
+    </style>
+</body>
+</html> 
