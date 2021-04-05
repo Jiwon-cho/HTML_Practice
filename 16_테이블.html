@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테이블 속성</title>
+    <style>
+        table{
+            width:300px;
+            height:300px;
+            caption-side:bottom;
+            border:1px dotted black;
+             border-collapse:separate; 
+            /* separate 면 empty-cells로 해서 띄운 빈공간 가능
+            collapse 면 안됨*/ 
+            border-spacing:10px;
+            empty-cells: hide;
+             table-layout: fixed; 
+            /* 이거를 안했는데 글자가 범위를 벗어나면 표가 이상하게 생겨짐*/ 
+            
+        }
+        table td{
+            border:1px dotted black;
+            word-break: break-all;
+            text-align:center;
+            vertical-align:top;
+            /* 이렇게하면 표 모양 최대한 유지하면서 긴것도 포용 */
+        }
+        /* 테이블에 테두리를 표시할때
+        border 속성은 table,td 에 각각 줘야함.
+         */
+    </style>
+</head>
+<body>
+    <h1>테이블 속성 활용하기</h1>
+    <table>
+        <caption>테스트 자료입니다.</caption>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td></td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>8</td>
+            <td>31422142222222222</td>
+        </tr>
+    </table>
+    
+</body>
+</html>

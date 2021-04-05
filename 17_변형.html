@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>변형 적용하기</title>
+</head>
+<body>
+    <h1>변형 이용하기</h1>
+    <p>
+        transform속성을 이용해서 처리하기됨.
+        변형
+    </p>
+    <h3>태그 특지이점으로 이동시키기</h3>
+    <p>
+        translate()함수를 이용함.
+    </p>
+    <img class="translate" src="https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2019/04/PS19040400038.jpg" alt="">
+    <img class="transX" src="https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2019/04/PS19040400038.jpg" alt="">
+    <img class="transY" src="https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2019/04/PS19040400038.jpg" alt="">
+    <img class="transZ" src="https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2019/04/PS19040400038.jpg" alt="">
+
+    <style>
+        .translate:active{
+            transform:translate(100px,200px);
+
+        }
+        .transX:active{
+            transform: translateX(200px);
+        }
+        .transY:active{
+            transform: translateY(200px);
+        }
+        .transZ:active{
+            transform:perspective(200px) translateZ(100px);
+        }
+        /* z 는 앞으로 나오는건데 원근감 표시 안하면 티가 안나서 무조건
+        해줘야함 */
+        img{
+            display: block;
+            width:200px;
+            height:200px;
+            margin-left:100px;
+        }
+    </style>
+    <h2>태그 확대하기</h2>
+    <p>
+        scale()함수 이용하기
+        확대,축소 비율을 인자로 넣음
+    </p>
+    <img class="scale" src="https://img.sbs.co.kr/newimg/news/20170718/201071624_1280.jpg" alt="">
+    <img class="scaleX" src="https://img.sbs.co.kr/newimg/news/20170718/201071624_1280.jpg" alt="">
+    <img class="scaleY" src="https://img.sbs.co.kr/newimg/news/20170718/201071624_1280.jpg" alt="">
+    <style>
+        .scale:hover{
+            transform:scale(1.5);
+        }
+        .scaleX:hover{
+            transform:scaleX(1.5);
+        }
+        .scaleY:hover{
+            transform:scaleY(1.5);
+        }
+    </style>
+    <h3>skew 적용하기</h3>
+    <p>각도대로 찌그러트리기</p>
+    <img class="skew" src="https://t1.daumcdn.net/tistoryfile/fs9/16_tistory_2008_09_09_02_03_48c55aff3069c" alt="">
+    <img class="skewX" src="https://t1.daumcdn.net/tistoryfile/fs9/16_tistory_2008_09_09_02_03_48c55aff3069c" alt="">
+    <img class="skewY" src="https://t1.daumcdn.net/tistoryfile/fs9/16_tistory_2008_09_09_02_03_48c55aff3069c" alt="">
+    <style>
+        .skew:hover{
+            transform:skew(10deg, 30deg);
+        }
+        
+        .skewX:hover{
+            transform:skewX(20deg);
+        }
+        
+        .skewY:hover{
+            transform:skewY( 30deg);
+        }
+        
+    </style>
+    <h3>rotate 적용하기</h3>
+    <p>태그를 회전시키는 것</p>
+    <img class="rotate" src="묭묭묭.jpeg" alt="">
+    <img class="rotateX" src="묭묭묭.jpeg" alt="">
+    <img class="rotateY" src="묭묭묭.jpeg" alt="">
+    <style>
+        .rotate:hover{
+            transform:rotate(45deg);
+        }
+        .rotateX:hover{
+            transform:perspective(200px) rotateX(45deg);
+        }
+        .rotateY:hover{
+            transform:perspective(200px) rotateY(45deg);
+        }
+    </style>
+
+    <h3>트렌지션 적용하기</h3>
+    <p>
+        태그가 변형속에 의해 변형이 될 때 부드럽게 이어지면서 변형될 수 잇게 해주는 
+        속성
+        transition-property: 적용할 속성(height, transform)
+        transition-duration: 지속시간(s)
+        transition-timing-function: linear,ease,ease-in,ease-out
+        transition: 위 속성을 한번에 설정하는 속성
+    </p>
+    <div class="basic transi transi2">트렌지션 적용하기</div>
+    <style>
+        .basic{
+            width:100px;
+            height: 100px;
+            border:1px solid red;
+            background-color: khaki;
+            transition-property:width,transform,background-color ;
+          
+            transition-duration:1.5s;
+            
+        }
+        .transi:hover{
+            width:800px;
+        }
+        .transi2:active{
+            transform:translate(200px,300px);
+        }
+    </style>
+</body>
+</html>
