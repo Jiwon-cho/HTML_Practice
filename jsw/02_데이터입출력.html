@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>데이터 입출력하기</title>
+</head>
+<body>
+    <h1>데이터 출력하기</h1>
+    <p>
+        스트립트에서 데이터를 출력하는 방식을 두개로 나눌 수 있음<br>
+        1.페이지(화면)에 출력하는 방법
+        2.브라우저에 출력하는 방법(알림창, console 탭)
+    </p>
+    <ul>
+        <li>페이지 출력
+            <ol>
+                <li>document.write("출력할구문||출력할 태그+태그+출력 구문")</li>
+                <li>태그(Element).innerHTML="출력할 구문||출려갈 태그를
+                    +출력구문"
+                </li>
+            
+            </ol>
+        </li>
+        <li>브라우저 출력
+            <ol>
+                <li>알림창 출력:[window.]alert("출력문구||변수")</li>
+                <li>console탭 출력: [window.]console.log("출력할문구||
+                    변수")
+                </li>
+            </ol>
+
+        </li>
+    </ul>
+
+    <h2>페이지 출력하기</h2>
+    <h3>document.write() 함수이용해서 출력하기</h3>
+    <button onclick="addImage();"> 이미지 추가</button>
+    <script>
+         function addImage(){
+            document.write("<img src='https://pbs.twimg.com/profile_images/1354608148611436546/mq9pseUI.jpg'>");
+        }
+        document.write("이건스크립트가 출력한 구문");
+        document.write("<h1>스크립츠가 추가한 h1태그</h1>");
+       
+    </script>
+    <h3>innerHTML속성을 이용해서 값 변경하기</h3>
+    <P>
+        자바스크립트에서 태그 -> Element 객체를 처리 
+        태그마다 innerHTML속성을 가지고 있음.
+        innerHTML속성에 있는 값은 태그에 문구로 출력됨.
+        태그선택.innerHTML="문구";
+    </P>
+    <div id="target">
+        
+    </div>
+    <button onclick="addH1();"> 추가</button>
+    <script>
+    function addH1(){
+        document.getElementById("target").innerHTML+="<h1>8시다.</h1>";
+    }
+        </script>
+
+     <h3>브라우저에 출력하기</h3>
+     <h4>알림창으로 출력하기: alert()함수를 이용</h4>   
+     <!-- <script>
+         alert("호잇");
+         var str="유지훈";
+         alert(str);
+     </script> -->
+     <h4>console창에 출력하기: console.log()함수 이용</h4>
+     <script>
+         //개발자도구 console창에서 확인해야함.
+         //개발자용 출력 도구
+
+        console.log("이거보이니");
+        var age=19;
+        console.log(age);
+        console.warn("motherfucker");
+        console.error("ㅗㅗㅗ");
+        var el=document.getElementById("target");
+        console.log(el);
+        console.table({name:"유병승",age:19,email:"sksk@gmail.com",});
+        console.dir(el);
+        // 타겟과 일치하는   값을 가져오기//
+     </script>
+
+    <h1>데이터 입력받기</h1>
+    <p>
+        데이터를 입력받는 방법은 두가지로 나눌 수 있음
+        1. 함수를 이용해서 입력받는 방법<br>
+            promot(),confirm()
+        2.input태그를 이용해서 입력받는 방법<br>
+    </p>
+    <h3>함수를 이용해서 데이터 받기</h3>
+    <h4>confirm()함수 이용하기</h4>
+    <p>
+        confirm함수는 true/false를 반환 해주는 함수
+        확인/취소버튼이 있는 알림창이 뜨고 확인을 누르면 true를 반환, 취소를
+        누르면 false를 반환하는 함수
+        매개변수에는 알림창에 출력된 문구를 넣는다.
+    </p>
+    <!-- <script>
+      console.log(  confirm("당신은 미성년자인가요?"));
+        if(confirm("여자입니까?")){
+            alert("여");
+        }else{
+            alert("남");
+        }    </script> -->
+        <h4>promt함수 이용하기</h4>
+        <p>클라이언트에게 문구를 입력받아 반환해주는 함수</p>
+        <div id="target2"></div>
+        <!-- <script>
+            // console.log(prompt("당신의 취미는"));
+            var data=prompt("당신의 취미는");
+            document.getElementById("target2").innerHTML=data;
+        </script> -->
+
+    <h3>input태그로 데이터 입력받기</h3>
+    <p>
+        input 태그도 태그로 Element 객체로 처리함
+        input 태그 property 중 value 가 있는데 iput값을 입력하면
+        value property에 값이 저장됨.
+    </p>
+    <input type="text" id="userId" name="userId">
+    <button onclick="checkInput();">입 력값 확인</button>
+    <script>
+            //  console.log( document.getElementById("userId").value);
+            //그냥 이렇게 하면 안들어감//
+        function checkInput(){
+       
+
+           console.log( document.getElementById("userId").value);
+        }
+    </script>
+
+
+
+
+    </body>
+</html>
