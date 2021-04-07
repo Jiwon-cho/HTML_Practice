@@ -4,20 +4,68 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>포트폴리오</title>
+<style>
+    div{
+        
+        display:flex;
+      
+        /* justify-content:space-around; */
+    }
+    label{
+     
+        font-size:13px;       
+        font-weight: bold;
+    }
+    fieldset{
+        width: 500px;
+        border:1 solid black;
+        height:auoto;
+    }
+    input.title,textarea{
+        margin-left:23px;
+        margin-bottom: 10px;
+       
+    }
+    .compose{
+        margin-left:30%;
+        height:26px;
+    }
+    .name,.content{
+        margin-left:20px;
+    }
+    .file{
+        margin-left:16px;
+    }
+  
+</style>
 </head>
 <body>
-<span>
-    <input type="email">
-<span>@naver.com</span>
-</span>
+    <form action="insert.no" name="notice" method="post">
+        <fieldset >
+            <legend>공지사항 작성하기</legend>
+            <div>
+                <label class="name"> 제목</label> <input class="title" type="text" name="title" required placeholder="제목을 입력하시오"  size=33>
+        </div>
+    
+            <div class="contents"> 
+                <label class="content"> <br><br><br>내용</label><textarea name="content" required placeholder="내용을 입력하시오"
+            cols="35" rows="13" style="resize:none;" ></textarea>
+          
+        </div>
 
-    <input type="number" placeholder="일" min="1" max="31" >
-    <select id="mm" class="sel" aria-label="월">
-    <option value>월</option>
-    <option value="01">1</option>
-    <option value="02">2</option>
-    <option value="03">3</option>
-    </select>    
+        <div>
+            <label>첨부파일</label>
+            <input type="file" name="uploadFile" class="file">
+        </div>
+        <br>
+        <div>
+            <p></p>
+            <input type="submit" value="작성 하기" class="compose">
+        </div>
+        
+        </fieldset>
+    </form>
+    
 </body>
 </html>
