@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>형변환하기</title>
+</head>
+<body>
+    <h3>숫자 -> 문자로 변경</h3>
+    <script>
+        let su=19;//number
+        let name="병승";//string
+        //문자열이랑 +연산시 자동으로 문자열로 형변환됨.
+        console.log(su+name,typeof(su+name));
+        console.log(su-name);
+        console.log(su,typeof(su));
+        //숫자를 문자로 강제 형변환하기
+        //toString() 함수를 이용
+        console.log(su.toString().charAt(0),typeof(su.toString()));
+    </script>
+
+    <h3>문자를 숫자로 변경하기</h3>
+    <p>
+        Number()함수이용하기, parseInt()함수이용하기
+    </p>
+    <div id="target"></div>
+    <style>
+        #target{
+            width:100px;
+            height:100px;
+        }
+    </style>
+    <input type="text" id="su1">
+    <input type="text" id="su2">
+    <button onclick="addOp();">계산하기</button>
+    <div id="result"></div>
+    <script>
+        //  let su1=document.getElementById("su1").value;
+        //     let su2=document.getElementById("su2").value;
+        // script 내에 있는건 시작 되는 순간 읽음, 즉
+        //f5 누르고 실행 되는 순간 익건 읽히는데 그 상황에서 
+        //input 값이 아예 없기 때문에 밖에 선언해두면 뭘 넣어도 0이다
+        function addOp(){
+            let su1=document.getElementById("su1").value;
+            let su2=document.getElementById("su2").value;
+            document.getElementById("result").innerHTML=Number(su1)+
+            Number(su2);
+
+            //하지만 function 안에 넣어놓으면 얘는 
+            //실행되는 순간 돌기 때문에 입력 값을 받아 올 수 있음.
+
+            //결국 입력 순서의 문제
+
+        
+        }
+
+
+
+        let su1=19;
+        let strSu="20";
+        let strSalary="600원";
+        // let a= "원500" 이렇게 되면 안 읽힘 , 숫자 뒤는 괜찮은데 앞은 못 읽어서 무시하게됨
+        console.log(su1+strSu);
+        console.log(su1+Number(strSu));
+        console.log(1000+Number(strSalary));
+        console.log(1000+parseInt(strSalary));
+        let div=document.getElementById("target");
+        div.style.width="200px";
+        console.log(parseInt(div.style.width)+10);
+        let change=parseInt(div.style.width)+10;
+        div.style.width=change+"px";
+    </script>
+</body>
+</html>

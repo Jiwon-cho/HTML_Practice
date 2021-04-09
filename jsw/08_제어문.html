@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제어문처리하기</title>
+</head>
+<body>
+    <h1>자바스크립트에서 제어문 처리</h1>
+    <h3>조건문</h3>
+    <p>
+        if,if~else,if~else if~else, switch 으로 구성되어있고
+        자바와 동일하게 사용된다.
+    </p>
+    <div>
+        <p>p1</p>
+        <p>p2</p>
+        <p>p3</p>
+        <p>p4</p>
+        <p>p5</p>
+    </div>
+    <button onclick="checkP();">값찾기</button>
+    <button onclick="changeP();">색 바꾸기</button>
+    <script>
+        function changeP(){
+            let p=document.getElementsByTagName("p");
+            console.log(p);
+            for(let i=1;i<p.length;i++){
+                let flag=i%3;
+                if(flag==0){
+                    p[i].style.color="pink";
+                 }else if(flag==1){
+                     p[i].style.color="skyblue";
+                 }else if(flag==2){
+                     p[i].style.color="lime";
+                 }
+            }
+        }
+        function checkP(){
+            let p=document.getElementsByTagName("p");
+            p=document.querySelectorAll("div>p");
+            console.log(p[0].innerHTML);
+            if(p[0].innerHTML.includes("1")){
+                p[0].style.color="red";
+            }
+            if(p[1].innerHTML=="p2"){
+                p[1].style.backgroundColor="orange";
+            }
+            console.log(p);
+        }
+    </script>
+
+    <ul>
+        <li>가</li>
+        <li>나다</li>
+        <li>라마바</li>
+        <li>1</li>
+        <li>23</li>
+        <li>456</li>
+        <li>a</li>
+        <li>bc</li>
+        <li>def</li>
+        <li>1000</li>
+    </ul>
+    <button onclick="liChange();">변경</button>
+    <script>
+        //let flag=true;
+        function liChange(){
+            //li내의 문구의 길이가 1이면 글자색 빨간색 2이면 주황색 3이면 녹색
+            //모두해당이 안되면 파랑색으로 변경하는 로직 구현하기
+            let lis=document.getElementsByTagName("li");
+            for(let i=0;i<lis.length;i++){
+                let value=lis[i].innerHTML;
+                let color;
+                // if(value.length==1){
+                //     color="red";
+                // }else if(value.length==2){
+                //     color="orange";
+                // }else if(value.length==3){
+                //     color="green"
+                // }else{
+                //     color="blue";
+                // }
+                //switch문으로 변경하기
+                // switch(value.length){
+                //     case 1 : color="aqua";break;
+                //     case 2 : color="magenta";break;
+                //     case 3 : color="khaki";break;
+                //     default : color="deeppink";break;
+                // }
+
+                //swicth문 인자에 boolean을 넣을 수 있음.
+                switch(true){
+                    case value.length==1 : color="tomato";break;
+                    case value.length==2 : color="lightgreen";break;
+                    case value.length==3 : color="lightskyblue";break;
+                    default : color="navy";break;
+                }
+
+
+                lis[i].style.color=color;
+            }
+            //flag=!flag;
+        }
+    </script>
+  
+  
+  <h3>짧은 조건문 이용하기</h3>
+  <p>
+      논리연산의 로직을 이용해서 조건문 처럼 활용하는 방식
+      A && B:두개다 true일 때 true , 그렇기 때문에 A가 true 면 B는 무조건 체크하지만
+      A가 false면 B는 체크 할 필요가 없음.
+      A || B:한개만 true true
+  </p>
+  <script>
+    //   let num=2;
+    //   let num=99;
+    //   if(num%2==0){
+    //       alert("짝수");
+    //   }
+    //   num%2==0&&alert("짝수");
+    //   num%2==0||alert("홀수");
+  </script>
+  <input type="text" id="num">
+  <button onclick="checkEven();">짝수,홀수</button>
+  <div id="result2"></div>
+  <script>
+      function checkEven(){
+          let num=document.getElementById("num").value;
+          
+          num%2==1&&(document.getElementById("result2").innerHTML="홀수");
+          num%2==1||(document.getElementById("result2").innerHTML="짝수");
+        //   num%2==0&&(document.getElementById("result2").innerHTML="짝수");
+        //   num%2==1&&(document.getElementById("result2").innerHTML="홀수");
+      }
+  </script>
+
+  <h3>반복문에 대해 알아보자</h3>
+  <p>
+      for, for~in, while, do~while,break, continue
+  </p>
+ <table>
+     <tr>
+         <td class="a">1</td>
+         <td class="a">2</td>
+         <td class="a">3</td>
+     </tr>
+     <tr>
+         <td class="a">4</td>
+         <td class="a">5</td>
+         <td class="a">6</td>
+     </tr>
+     <tr>
+         <td class="a">7</td>
+         <td class="a">8</td>
+         <td class="a">9</td>
+     </tr>
+ </table>
+  </table>
+  <button onclick="tdChange();">td 변경하기</button>
+  <script>
+      function tdChange(){
+        let td=document.getElementsByClassName("a");
+        console.log(td);
+        for(let i=0;i<td.length;i++){
+            let val=td[i].innerHTML;
+            if(Number(val%2==1)){
+                td[i].style.backgroundColor="pink";
+            }else{
+                td[i].style.backgroundColor="blue";
+            }
+        }
+      }
+      for(let i=0;i<10;i++){
+          console.log(i);
+      }
+      let str="rclass 화이팅";
+      for(let i=0;i<str.length;i++){
+          console.log(str.charAt(i));
+      }  
+      </script>
+
+      <h4>for in</h4>
+      <p>
+          for in문은 for each문과 비슷하나 배열에서는 사용하지 않음
+          *객체에 대한 데이터를 전체 순회할 때 사용
+      </p>
+      <script>
+        let obj={
+            name:"유병승",
+            age:19
+        }
+        for(let key in obj){
+            console.log("key : "+key+" value : "+obj[key]);
+        }
+    </script>
+    <h3>while, do~while</h3>
+    <button onclick="searchTd();">while문 이용하기</button>
+    <div id="result3"></div>
+    <script>
+        function searchTd(){
+            let td=document.getElementsByClassName("a");
+            let i=0;
+            while(true){
+                let temp=td[i++].innerHTML;
+                if(temp=="8"){
+                    document.getElementById("result3").innerHTML="있다";
+                    break;
+                }
+            }
+            do{
+                console.log("한번만 실행");
+            }while(false);
+        }
+    </script>
+</body>
+</html>
