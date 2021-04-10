@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테두리스타일 적용하기</title>
+</head>
+<body>
+    <h2>테두리스타일 적용하기</h2>
+    <div id="container">
+        <div class="basic">none</div>
+        <div class="dashed">dashed</div>
+        <div class="dotted">dotted</div>
+        <div class="double">double</div>
+        <div class="grove">grove</div>
+        <div class="inset">inset</div>
+        <div class="outset">outset</div>
+        <div class="ridge">ridge</div>
+        <div class="all">all</div>
+    </div>
+    <h1 class="head">오늘의 날씨</h1>
+    <style>
+        .all{
+            /* border-top-style:dashed;
+            border-bottom-style: dotted; */
+            border: 5px hotpink outset;
+            
+        }
+        .head{
+            border-top-style:solid;
+            border-bottom-style: solid;
+            text-align:center;
+            border-color: orangered;
+            border-bottom-width: 10px;
+        }
+        .dotted{
+            border-style:dotted;
+        }
+        .outset{
+            border-style:outset;
+        }
+
+        .ridge{
+            border-style:ridge;
+        }
+
+        .inset{
+            border-style:inset;
+        }
+        .double{
+            border-style:double;
+        }
+
+        .grove{
+            border-style:groove;
+        }
+
+        .dashed{
+            border-style:dashed;
+        }
+
+        #container>div{
+            width: 200px;
+            height: 200px;
+            margin: 20px;
+        }
+        #container{
+            display:flex;
+            flex-wrap: wrap;
+        }
+    </style>
+    <img class="ridge radius boxshadow" src="https://t1.daumcdn.net/cfile/tistory/225E1E3958E60FCD03"
+    height="200" width="200" alt="없음">
+
+    <h2>테두리의 모서리를 둥글게 표현</h2>
+    <p>
+        border-radius: 테두리 모서리를 둥글게 표현하는 속성
+    </p>
+    <style>
+        .radius{
+            /* border-radius:100px; */
+            border-top-left-radius: 100px;
+            border-bottom-right-radius: 100px;
+            border-top-right-radius: 100px;
+        }
+    </style>
+    <h3>테두리에 그림자 표시하기</h3>
+    <p>bx-shados: 태그에 그림자표시하기
+    </p>
+    <style>
+        .boxshadow{
+            box-shadow: 3px 3px 5px gray,6px 6px 5px red;
+        }
+    </style>
+</body>
+</html>

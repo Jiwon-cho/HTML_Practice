@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>포지셔닝 속성</title>
+</head>
+<body>
+    <h1>position 속성</h1>
+    <p>
+        태그를 페이지상에서 원하는 위치에 배치할 수 잇게 하는 속성
+        position속성은 위치를 지정하는 속성인 top,left,right,bottom
+        과 같이 사용함.
+        position 속성값
+        static: 기본값 position을 설정하지 않으면 기본 설정
+        relative: 부모의 position 속성이 static 일 때 부모태그의 왼쪽 
+        꼭지점 지점이 기준(0,0)
+        absolute: 부모의 position 속성이 static일 때 페이지의 왼쪽 
+        꼭지점 지점이 기준(0,0)
+
+        *부모의 position속성이 releative, absolute명 둘다 부모의 
+        왼쪽 꼭지점이 기준(0,0)
+    </p>
+    <div class="container">
+        <div class="innerdiv relative">innerdiv</div>
+        <div class="innerdiv2 absolute">innerdiv2</div>
+    </div>
+    <div class="container basic">
+        <div class="innerdiv relative">innerdiv</div>
+        <div class="innerdiv2 absolute">innerdiv2</div>
+        <div class="innerdiv fixed">fixed</div>
+    </div>
+    <style>
+        .fixed{
+            position:fixed;
+            top:50px;
+            left:100px;
+        }
+        .basic{
+            /* position:relative; */
+            position:absolute;
+            /* left:0px;
+            top:0px; 
+            이거 설정 안하면 속성만 absolute 아니면 relative static임
+            안움직임 */
+        }
+        .absolute{
+            position:absolute;
+            /* left:50px;
+            top:50px; */
+            left:40%;
+            top:30%;
+            /* 이렇게 하면 부모따라 비율로 움직임
+            위에 꺼 경우 부모가 static이라 전 체 페이지 비율에 따라 바뀌고
+            밑에껀 부모가 relative라 시작점이 거기라 그거 안움직이면 안움직임 */
+        }
+        .innerdiv2{
+            border:1px blue solid;
+            width:200px;
+            height:200px;
+        }
+        .relative{
+            position:relative;
+            left:100px;
+            top:100px;
+        }
+        .innerdiv{
+            border:1px green solid;
+            width:200px;
+            height:200px;
+        }
+        .container{
+            border:1px red solid;
+            width:500px;
+            height:400px;
+        }
+    </style>
+    
+</body>
+</html>
