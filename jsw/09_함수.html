@@ -119,6 +119,7 @@
         //그 과정에서 var 함수는 함수가 아닌 미확인으로 정의되잇음
         //그런데 거기서 함수로 변수 선언을 하는 코드가 그 위에 있으면
         //읽을 수 가 없음. undefined라 그래서 안됌.
+        //let 경우에는 초기화가 안돼있어서 위에 쓰면 안됌
        
        //temp=returnParam1();
       
@@ -133,5 +134,267 @@
 
         // };
     </script>
+
+    <h2>익명 함수 활용하기</h2>
+    <p>
+        익명함수는 변수(일반변수, 매개변수) 에 대입해서 사용을 한다.
+        함 수를 호출할 때는 함수명으로 호출해야 하는데, 선언시 호출할 명칭을 선언 하지 않기 때문에
+        callback 함수로 많이 사용함(매개변수로 함수를 넣는 것)
+        스스로 동작함수 구현시.
+    </p>
+    <script>
+        //매개변수가 없고 반환형이 없는 함수 선언
+        let annoFunc=function(){
+            console.log("아무 것도 없다.")
+        }
+        //변수로 선언 했어도 함수기때문에 ()를 붙여서 실행시켜줘야함.
+         annoFunc();
+
+         //매개변수 있고 반환형 없는 함수
+         annoFunc=function(su,su2){
+             console.log(`더하기: ${su+su2}`);
+         }
+         annoFunc(10,20);
+
+         annoFunc=function(su,su2){
+             return su+su2;
+         }
+         let result=annoFunc(10,10);
+         console.log(result);
+
+         //익명함수도 argument가 있을까?
+         let arguTest=function(){
+             console.log(arguments);
+         }
+         arguTest(1,2,3,4,5,6,7);
+
+        //  let name=1;
+        //   name=2;
+         //앞에 let 선언 안하면 변수에 새 로운 값 대입 가능
+        //  console.log(name);
+   
+        // //hoisting -> 저장소를 먼저 확보하며 호출가능하게 하는 건
+        // //선언되기전 함수, 변수를 호출할 수 있게 하는 기능
+        // test();
+       
+        // //testHoisting();
+        // //이렇게 했을 때 var는 fucntion이 아니라 하고 / let은 초기화가 안됐다고 나옴
+
+        // // let testHoisting=function(){
+        // //     console.log("testHoisting함수","난 익명함수다");
+        // // }
+        // var testHoisting=function(){
+        //     console.log("testHoisting함수","난 익명함수다");
+        // }
+
+        // // testHoisting();
+        // function test(){
+        //     console.log("test함수","hoisting")
+        // }
+        // testHoisting();
+        let test=function(){
+            console.log("test함수","hoisting");
+        }
+
+        test();
+       // testHoisting();
+        
+        let testHoisting=function(){
+            console.log("testHoisting함수","난 익명함수야!");
+        }
+        
+        // function test(){
+        //     console.log("test함수","hoisting");
+        // }
+        let test1=function(){
+            console.log("덮어써지니?");
+        }
+        // function test(){
+        //     console.log("덮어써지니??");
+        // }
+        test1();
+
+        test1=function(){
+            console.log("하하하하 지훈이가 바꿈...누가 찾을 수 있을까?");
+        }
+        test1();
+
+        //통상적으로 함수는 변경하지 않고 고정해서 사용하기 때문에 변경할 수 없는 const를 사용하는게 안정적임
+
+        const finalFunc=function(){
+            console.log("이건 변경 못하지롱");
+        }
+        //const를 씀으로써 절대 다시는 못 쓰게함
+        finalFunc();
+        
+        // finalFunc=function(){
+        //     console.log("하하하 지훈이가 변경할꺼지롱!");
+        // }
+
+
+       
+    </script>
+     
+    <h2>callback함수로 이용하기</h2>
+    <p>
+        매개변수로 함수를 전달하는것
+        기본제공함수, 이벤트핸들링(처리) 많이 사용을 함.
+    </p>
+    <ul>
+        <li class="test">1</li>
+        <li class="test">2</li>
+        <li class="test">3</li>
+        <li class="test">4</li>
+    </ul>    
+
+
+    <script>
+        //li태그에 이벤트 연결하기
+        let lis=document.getElementsByClassName("test");
+        for(let i=0;i<lis.length;i++){
+            lis[i].addEventListener("click",function(){
+                this.innerHTML+="클릭함";//this: 이벤트가 발생한 객체임
+            })
+        }
+    //기본 window가 제공하는 함수
+    setTimeout(function(){
+        //alert("0.5초후 실행!");    
+    },500);
+
+    //callback 함수는 꼭 익명함수만 사용해야 하는것은 아님.
+    
+    function callbackTest(){
+       // alert("하하");
+    }
+    setTimeout(callbackTest,1000);
+    </script>
+    
+    <h2>함수리턴하기</h2>
+    <p>
+        함수는 자료형을 사용하기 때문에 리턴도 가능
+    </p>
+    <script>
+        const returnFunc=function(){
+            return function(){
+             //   alert("반환된 함수");
+            }
+        }
+
+        //반환받은 함수를 호출하기
+        let returnFuncExec=returnFunc();
+        console.log(returnFuncExec);
+        // returnFuncExec();
+        //한번에 실행하기
+        returnFunc()();
+     //returnFunc()<-returnFuncExec + () - 결국 returnFuncExec 실행 하는 구문
+    </script>
+
+    <h2>클로저의 개념</h2>
+    <p>
+        자신을 내포하는 함수의 컨텍스트에 접근 할 수 있는 함수<br>
+        함수가 특정스코프에 접근할 수 있도록 의도적으로 그 스코프에서 정의하는 것<br>
+        함수를 선언할 때 만들어지는 유효범위가 사라진 후에도 호출 할 수 있는 함수.
+    </p>
+    <script>
+        const basicClosure=function(){
+            let name="";
+            return function(addName){
+                name+=addName;
+                console.log(`누적: ${name} 신규: ${addName}`);
+            }
+        }
+        let closureTest=basicClosure();
+        closureTest("유병승");
+        closureTest("조지원");
+        closureTest("호랑이");
+        closureTest=null;
+        //이렇게 null넣어버리면 그냥 사라지고 다시 못 씀
+        
+        // console.log(name);
+        
+        //매개 변수를 이용하는 방법
+        const basicClosure2=function(dinner){
+            return function(addSub){
+                dinner+=" "+addSub;
+                console.log(dinner);
+            }
+        }
+
+        closureTest=basicClosure2("계란초밥");
+        closureTest("간장");
+        closureTest("락교");
+
+        const basicClosure3=function(flag){
+            return function(){
+                let le=document.getElementById("targetToggle");
+                if(flag){
+                    le.style.backgroundColor="lime";
+                    flag=!flag;
+                }else{
+                    le.style.backgroundColor="white";
+                    flag=!flag;;
+                }
+            }
+        }
+        //flag=false; 라고 하면 이게 고정되서 원하는 대로 바꿀 수가 없음
+        const targetFunc=basicClosure3(true);
+    </script>
+    <h2 id="targetToggle" onclick="targetFunc();">이거 변경하기</h2>
+
+    <button id="btn">증가하기</button>
+    <script>
+        document.getElementById("btn").addEventListener("click",function(){
+            let count=0;
+            let span=document.createElement("span");
+            span.innerHTML="click";
+            span.addEventListener("click",function(){
+                this.innerHTML=`${count++}번 누름`;
+            });
+            document.getElementById("btn").insertAdjacentElement("afterend",span);
+        });
+    </script>
+ <h2>ES6에서 함수표현식</h2>
+ <p>
+     arrow함수라고 함 화살표함수 * 람다와유사()->{}
+     익명함수를 표현할때 더 간결하게 표현할 수 있는 함수
+     ([매개변수])=>{ 로직 [return 값]}
+
+     1. this값이 무조건 window를 바라보게됨.
+     2. arguments객체를 사용할 수 없음
+     3. 객체의 매소드를 선언시에는 사용하지말 것
+ </p>
+
+ <script>
+     const arrowFunc=()=>{
+         console.log("화살표함수임");
+     }
+     arrowFunc();
+
+     //매개 변수 있는 화살표 함수
+     const arrowFunc2=(name, age)=>{
+         console.log(`이름: ${name} 나이: ${age}`);
+     }
+     arrowFunc2("김기영",49);
+
+     //return값 있는 화살표 함수
+     const arrowFunc3=()=>{
+            return "리턴 화살표 함수";
+     }
+     let temp1=arrowFunc3();
+     console.log(temp1);
+ </script>
+ <button id="btn2">실행</button>
+ <div id="targetArrow"></div>
+ <script>
+     //이벤트 핸들러에 화살표 함수 넣기
+     let b=document.getElementById("btn2");
+     b.addEventListener("click", function(){
+    //  ()=>{
+         console.log(this);//화살표 함수에서는, 이벤트가 발생한 객체가 아니라 window객체임.
+        let t=document.getElementById("targetArrow");
+        t.innerHTML+="<h3>화살표 함수 실행</h3>";
+     })
+ </script>
+    
 </body>
 </html>
