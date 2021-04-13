@@ -266,16 +266,114 @@
     console.log(db);
 
     //부분을 수정 , 원본 값을 수정
-    console.log(language);
-    language.splice(3,2);//3번부터 2개
-    console.log(language);
-    language.splice(3,0,'이제곧 끝남!')//추가, 밀어버림
-    console.log(language);
-    language.splice(1,2,'이거추가');//원하는 위치 + 원하는 만큼 없앰
-    console.log(language);
+    // console.log(language);
+    // language.splice(3,2);//3번부터 2개
+    // console.log(language);
+    // language.splice(3,0,'이제곧 끝남!')//추가, 밀어버림
+    // console.log(language);
+    // language.splice(1,2,'이거추가');//원하는 위치 + 원하는 만큼 없앰
+    // console.log(language);
 </script>
 
+<h2>배열에 있는 값을 필터</h2>
+<p>
+    includes(): 특정값이 배열에 있는지 여부를 확인하는 함수(true/false)<br>
+    find(함수): 특정 기준에 맞는 데이터를 찾는 함수 -> 제일 처음 찾은 한개 데이터만 반환 -> 
+    리터럴 값<br>
+    filter(함수): 특정기준에 맞는 데이터를 찾는 함수 -> 기준에 맞는 값 전체를 반환 -> 새 배열 
+    <br>
+</p>
+<button onclick="includesTest();">includes</button>
+<button onclick="findTest();">find</button>
+<button onclick="filterTest();">filter</button>
+<script>
+ let height=[170.3,160.4,178.5,180.2,184.3,185.2,189.5,190.2];
+    const includesTest=()=>{
+        console.log(height.includes(160.4));
+        console.log(height.includes(200));
+    }
 
+    const findTest=()=>{
+        //배열에서 매개변수 함수 기준에 맞는 한개의 값 찾기
+       let result= height.find((v)=>{
+            //매개변수 리턴값이 true 배열인 한개 반환
+            return v>180;
+        });
+        console.log(`결과:  ${result} ${typeof(result)}`);
+    }
+    const filterTest=()=>{
+       let result =height.filter((v)=>{
+           //매개변수 함수의 return 값이 true인 전체 값 => 배열
+           return 180<v;
+       });
+       console.log(`결과: ${result} ${Object.prototype.toString.call(result)}`);
+    }
+</script>
+
+<h2>배열값 순회하는 함수</h2>
+<p>
+forEach(): 배열에 잇는 갑쇼 전체를 접근하는 것, 매개변수로 함수(v,i,a)
+</p>
+<button onclick="forEachTest();">전체순회하기</button>
+<script>
+    //배열 순회 기본 for문으로 인덱스로 접근
+    const forEachTest=()=>{
+        // for(let i=0;i<height.length;i++){
+        //     console.log(height[i]);
+        // }
+        height.forEach((v,i,a)=>{
+            //v값에 배열의 첫번 째 인덱스 부터 차례대로 값을 대입하는 변수
+            console.log(v,i,a);
+            //v-값/ i-인덱스 번호/ a-배열
+        });
+       
+    }
+    let button=document.getElementsByTagName("button");
+        console.log(button);
+        console.log(Object.prototype.toString.call(button));
+        console.log(Object.prototype.toString.call(height));
+
+    //HTMLCollection에서 가능할까?-> 배열 형식을 가지는 Object
+    //안됀다, foreach 는 object에서만 쓸 수 있음
+    // button.forEach((v)=>{
+    //     console.log(v);
+    // });
+    
+    // for(let i=0;i<button.length;i++){
+    //     console.log(button[i]);
+    // }
+    
+    //아예 foreach문 못 쓰나?
+    //call 함수를 이용해서 Array객체의 메소드를 빌릴 수 있음.
+    //다른 객체 빌려쓸 때는 조건1. key 값이 인덱스 0...1...(정수형) / 2.length가 잇어야함
+    // 다시 말하면 배열 형식이여야함
+    Array.prototype.forEach.call(button,(v,i,a)=>{
+        console.log(v);
+    })
+</script>
+
+<h3>누적 계산을 해주는 함수</h3>
+<p>
+    reduce(함수[,초기값]) : 특정변수에 매개변수의 return 값을 지속 저장하는 함수
+    매개 변수로 전달된 함수의 매개변수
+    첫번째 변수: 누적시키는 변수
+    두번째 변수: 다음 값
+    return 값: 첫번째 변수에 저장
+</p>
+<button onclick="reduceTest();">reduceTest</button>
+<script>
+    const reduceTest=()=>{
+        //합계, 평균
+        let result=height.reduce(function(total,nextVal){
+            console.log(total,nextVal);
+            return total+nextVal;
+        },//,초기값) 두번째 매개변수는 100<-로 하면 초기값이 100으로 됨
+        );
+        console.log(`합계: ${Math.ceil(result)} 평균: ${result/height.length}`);
+        //Math.ceil ->소수점 이하를 올림한다 Math.floor -> 버림 Math.round-> 반올림
+
+    }
+</script>
 </body>
 
 </html>
