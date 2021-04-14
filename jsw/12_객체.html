@@ -34,7 +34,7 @@
                 return this.name;
             },
             "^^*":function(){
-                alert("되니?");
+                //alert("되니?");
             }
 
         }
@@ -201,6 +201,7 @@
         // table.style.height="300px";
             table.style.border="1px solid black";
         for(let i=0;i<students.length;i++){
+            //students.forEach((v,i)=>{)
             // table.innerHTML+="<tr>";
             // table.innerHTML+=`<td>${students[i]["name"]}</td>`;
             // table.innerHTML+=`<td>${students[i]["age"]}</td>`;
@@ -298,6 +299,47 @@
     console.log(m.userId);
     m.setUserId("user02");
     console.log(m["getUserId"]());
+</script>
+
+<h3>상속 적용하기</h3>
+<p>
+    이미 작성 되어있는 객체를 가져다 쓰는 재활용을 의미
+</p>
+<script>
+function Book(title,price,discountRate){
+    this.title=title;
+    this.price=price;
+    this.discountRate=discountRate;
+    // this.getSalPrice=function(){
+    //     return this.price-(this.price*this.discountRate);
+    // }
+}
+//함수를 공용으로 사용할 수 있게 만들어보자
+Book.prototype.getSalPrice=function(){
+    return this.price-(this.price*this.discountRate);
+}
+let b=new Book("자바의 정석",35000,0.3);
+console.log(b);
+console.log(b.getSalPrice());
+let b1=new Book("오라클의 정석",34000,0.4);
+console.log(b1);
+console.log(b1.getSalPrice());
+
+//상속을 적용해보자
+function Novel(title,price,discountRate,type){
+    this.base=Book;
+    this.base(title,price,discountRate);
+   //상속 선언
+    this.type=type;
+}
+Novel.prototype=Book.prototype;
+//book 꺼 가져오기
+//Novel.prototype.getSalPrice=functino(){
+//기능 추가
+//}
+let n=new Novel("해리포터",25000,0.5,'소설');
+console.log(n);
+console.log(n.getSalPrice());
 </script>
 </body>
 </html>

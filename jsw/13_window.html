@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>윈도우 객체</title>
+</head>
+<body>
+    <h1>윈도우 객체</h1>
+    <p>
+        윈도우 객체는 자바스크립트의 최상위 객체로 모든 객체와 함수를 가지고 있음.
+        browser 가 열리면 자동으로 생성이 됨. 한개 브라우저 창 한개 window 객체가 생성.
+        윈도우 객체의 주요자식 객체
+        Bom <br>
+        location: 브라우저에서 URL 창에 대한 정보를 가지고 있는 객체
+        navigator: 브라우저에 대한 정보를 가지고 있는 객체
+        screen: 사용자 화면에 대한 정보를 가지고 있는 객체
+        history: 페이지 이동 이력정보를 가지고 있는 객체 *함부로 수정 불가-브라우저에서 관리
+        Dom<br>
+        document: html 태그를 객체화한 객체
+    </p>
+
+    <script>
+        //윈도우 함수 property 확인하기
+        console.log(window);
+    </script>
+
+    <h2>윈도우 함수 이용하기</h2>
+    <h3>(window.)//-디폴트라 없어도됨// open</h3>
+    <p>
+        새창을 생성하는 함수 <br>
+        open('','','',)<br>
+        첫번째 : 가져올 페이지 주소(url)/ 아무것도 작성하지 않으면 흰 화면이 출력
+        두번째: 새창을 열 때 어떻게 open 할지 (_self,_blank)
+    </p>
+    <button onclick="newWin();">새창열기</button>
+    <button onclick="childWrite();">자식이 부모창에 데이터 전송</button>
+    <button onclick="childClose();">자식창 닫기</button>
+
+    <p>
+        open으로 열린 자식창에서는 opener property 를 통해 부모의 window객체에 접근 할 수 있다.
+    </p>
+    <div id="parent"></div>
+<script>
+    let ch;
+    const childClose=()=>{
+        ch.close();
+    }
+    const childWrite=()=>{
+        const child=open("","_blank","width=400,height=300");
+        ch=child;
+        let temp="<script>";
+            temp+="function sendData(){";
+            temp+="let con=opener.document.getElementById('parent');";
+            temp+="let val=document.getElementById('data').value;";
+            temp+="con.innerHTML='<h1>'+val+'</h1>';}";
+            temp+="</";
+            temp+="script>";
+  child.document.write("<html><head></head><body><h2>부모창에 전송할 내용</h2><input type='text' id='data'><button onclick='sendData();'>전송</button>"
+    +temp+"</body></html>");
+    }
+    const newWin=()=>{
+        //open();//새창을 여는 기본 설정은 _blank
+        //새창에 매개변수 대입하기
+        // open("http://www.naver.com","_blank","width=200,height=200");
+        let val=open("12_객체.html","_blank","width=600,height=200");
+        //open 함수는 반환형으로 생성되 window객체를 반환
+        console.log(val);
+       // val.close(); 닫기
+       console.log(val.document.getElementsByTagName("p"));
+       //순서를 떠나서 뭐가 됬든 불러와서 그 정보를 뽑아오는 건 안됌
+      // val.document.write("<h1>하이</h1>");
+    }
+    
+</script>
+
+<h2> setTimeout() /setInterval() </h2>
+<p>
+    setTimeout: 일정시간 후 특정한 로직(함수)을 한번만 실행하는 것
+    3개 매개변수
+    첫번째: 로직(함수)
+    두번째: 시간(ms 1/1000)
+    [세번째: 로직실행시 전달할 값 설정]
+    setInterval: 일정시간 간격으로 특정한 로직(함수)을 반복적으로 실행하는 것
+    첫번째: 로직(함수)
+    두번째: 시간(ms 1/1000)
+    [세번째: 로직실행시 전달할 값 설정]
+    <br>
+    clearTimeout(id)/clearInterval(id): 멈추게함
+    * setTimeout||setInterval 함수의 반환값이 id값이 됨
+</p>
+<input type="radio" class="check" name="check" value="y">Y
+<input type="radio" class="check" name="check" value="n">N<br>
+<button onclick="setTimeoutTest();">timeoutTest</button>
+<button onclick="setIntervalTest();">intervalTest</button>
+<button onclick="stopInter();">stop</button>
+<div id="countContainer"><h1></h1></div>
+<script>
+    const setTimeoutTest=()=>{
+        //radio버튼 가져오기
+        let flag=true;
+        let radio=document.querySelectorAll("[name=check]");
+        
+        for(let i=0;i<radio.length;i++){
+            if(radio[i].value=='y'&&radio[i].checked){
+                flag=false;
+                break;
+            }
+           // console.log(radio[i].checked) 
+            //체크로 트루 폴스 확인;
+        }
+        console.log(flag);
+        let child=open("","","width=500,height=300");
+        child.alert("이창은 3초후에 닫힙니다.");
+        const timefunc=setTimeout(()=>{
+            child.close();
+        },3000);
+        //다 읽고나서 3초 후
+        if(flag){
+            clearTimeout(timefunc);
+            //작동 안돼게 하는 것..y일 때 false 가 되니까 작동이 안되서 꺼지는거고
+            //true 일때는 멈춰! 작동되서 안꺼지는거임
+        }
+        
+    }
+    let interId;
+    const setIntervalTest=()=>{
+        let target=document.querySelector("#countContainer>h1");
+        let count=0;
+       interId= setInterval(()=>{
+            target.innerHTML=count++;
+        },1000);
+        //interId 는 setInterval의 반환 값을 받는거다, 함수 x
+        //closure 쓴거임 왜냐? 지역변수라 한번 쓰고 날아가야 하는데 계속 됨
+        console.log(typeof(interId))
+        //보면 number인걸 알 수 있음 , 함수 아님
+    }
+
+
+    const stopInter=()=>{
+        clearInterval(interId);
+    }
+</script>
+
+<h3>윈도우 크기, 위치 조정하기</h3>
+<button onclick="createWin();">윈도우 생성</button>
+<p>
+    resizeTo(가로크기,세로크기);/moveTo(x위치 ,y 위치);
+</p>
+<button onclick="createWin();">윈도우 생성</button>
+<button onclick="winSize();">윈도우 사이즈조정</button>
+<button onclick="winMove();">윈도우 위치조정</button>
+<script>
+    let childWin;
+    //변수없이 선언할때는 const 안됌 undefiened 들어가는 순간 끝나기 때문
+    const createWin=()=>{
+        childWin=open("","","width=400,height=300");
+    }
+    const winSize=()=>{
+        childWin.resizeTo(Math.ceil(Math.random()*900+300),Math.ceil(Math.random()*900+300));
+    }
+    const winMove=()=>{
+        childWin.moveTo(Math.ceil(Math.random()*900+100),Math.ceil(Math.random()*900+100));
+    }
+</script>
+
+<script>
+//#target2>h2의 글자를 console로 출력하기
+onload=function(){let text=document.querySelector("#target2>h2");
+console.log(text);//null 나옴 / 이게 먼저 읽혀서 아직 밑에 있는걸 읽지 못했기 때문에 null로 나옴
+console.log(text.innerHTML);}
+//그래서 onload로 해놓으면 다 띄우고나서 읽게끔 함. 즉 스크립트가 위에 있어도 읽힘.
+
+// onload=function(){
+//     console.log("이것도 실행하자");
+// }
+//onload 여러번 사용 못함.
+</script>
+
+<h3>onload속성 이용하기</h3>
+<!-- on은 이벤트 관련 -->
+<p>
+    onload: 페이지에 있는 모든 태그가 로드가 된 이후에 실행하는 발생하는 이벤트 속성-> 함수를 대입
+</p>
+<div id="target2">
+    <h2>이제 곧 저녁 시간이다.</h2>
+</div>
+
+<h3>window.open("","_self","")</h3>
+<p>
+    윈도우가 열리는 방식을 _self로 설정하면 페이지를 이동하는 효과를 준다.
+</p>
+<button onclick="selfOpen();">selfOpen</button>
+<script>
+    const selfOpen=()=>{
+        //open("http://www.iei.or.kr","_self","width=400,height=300");
+        setTimeout(()=>{
+            this.close();
+        },1000);
+    }
+</script>
+</body>
+</html>
