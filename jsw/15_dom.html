@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM </title>
+</head>
+<body>
+    <h1>DOM</h1>
+    <p>
+        html문서에 있는 태그들 객체화하여 관리할 수 있게 한 객체
+        window객체의 property 객체로 태그객체를 관리하는 객체
+    </p>
+    <script>
+        console.log(document);
+    </script>
+
+    <h2>document객체를 이용해서 태그를 동적으로 생성</h2>
+    <p>
+        document객체의 createElement()매소드를 이용해서 생성 -> 요소노드
+        예) p,img,audio
+        만일 텍스트가 필요한 태그면 텍스트도 생성해줘야 함 ex)p/h1,h2....
+        document객체의 createTextNode("문구")매소드를 이용 -> 텍스트 노드
+        텍스트가 필요없는 태그면 생성된 요소노드에 속성만 설정해줌
+    </p>
+    <button onclick="createTag();">태그생성</button>
+    <script>
+        const createTag=()=>{
+            const tag=document.createElement("h2");//요소노드생성(태그생성)
+            //정확히는 element object 다
+            console.log(tag);
+            console.dir(tag);
+            //h2 객체를 생성한 것
+            const txt=document.createTextNode("처음만든태그");
+            console.log(txt);
+            tag.appendChild(txt);
+            //이렇게 하면 안에 innerHTML 이나 innerText 로 들어감
+            console.log(tag);
+            //기본적인 생성매소드를 이용해서 텍스트를 붙임
+            console.dir(tag);
+            // tag.innerHTML="새로넣은 값";
+            tag.innerText="새로넣는 값";
+            //그냥 문구 하나 넣으려면 innerHTML 이나 innerText 로 해도 되지만
+            //안에 태그 또 넣고 하려면 appendChild 로 하는게 맞다
+            console.log(tag);
+
+            //자바스크립트로 생성한 태그를 페이지에 출력을 하려면
+            //현재 페이지에 출력되있는 태그에 연결 해줘야 한다.
+            document.body.appendChild(tag);
+            //append는 맨 마지막 자식태그로 넣으라는 것, 제일 밑으로 붙음
+        }
+    </script>
+    <div id="container"></div>
+    <button onclick="addP()">p태그 추가하기</button>
+    <!-- 태그는 선택(p,h1,h2,h3), 해서 입력 받고 문구는 client입력 값을 기준으로 태그를 생성해서
+    #container 태그에 넣기-->
+    <br>
+    <input type="radio" class="check" name="check" value="p">p
+    <input type="radio" class="check" name="check" value="h1">h1
+    <input type="radio" class="check" name="check" value="h2">h2
+    <input type="radio" class="check" name="check" value="h3">h3
+    <input type="radio" class="check" name="check" value="mark">mark<br>
+    <input type="text"  id="txt">
+    <button onclick="inputTxt();">텍스트 만들기</button>
+    <br>
+    <select name="cho" id="cho">
+        <option value="p">p</option>
+        <option value="h1">h1</option>
+        <option value="h2">h2</option>
+        <option value="h3">h3</option>
+        <option value="mark">mark</option>
+    </select>
+    <input type="text" id="text">
+    <button onclick="addUserTag();">태그추가</button>
+    <script>
+         const addUserTag=()=>{
+            let tag=document.getElementById("cho").value;
+            let txt=document.getElementById("text").value;
+            let newTag=document.createElement(tag);
+            newTag.innerText=txt;
+            document.getElementById("container").appendChild(newTag);
+        }
+       const addP=()=>{ 
+        const tag1=document.createElement("p");
+        const text1=document.createTextNode("집에가고싶다, 묭시기는 내꺼다");
+        tag1.appendChild(text1);
+        document.getElementById("container").appendChild(tag1);
+    }   
+    const inputTxt=()=>{
+        let radio=document.querySelectorAll("[name=check]");
+        let tg;
+        const val=document.getElementById("txt").value;
+        const txt1=document.createTextNode(val);
+        document.getElementById("txt").value="";
+        for(let i=0;i<radio.length;i++){
+            if(radio[i].value=="p"&&radio[i].checked){
+                tg=document.createElement("p");
+                tg.appendChild(txt1);
+            }else if(radio[i].value=="h1"&&radio[i].checked){
+                tg=document.createElement("h1");
+                tg.appendChild(txt1);
+            }else if(radio[i].value=="h2"&&radio[i].checked){
+                tg=document.createElement("h2");
+                tg.appendChild(txt1);
+            }else if(radio[i].value=="h3"&&radio[i].checked){
+                tg=document.createElement("h3");
+                tg.appendChild(txt1);
+            }else if(radio[i].value=="mark"&&radio[i].checked){
+                tg=document.createElement("mark");
+                tg.appendChild(txt1);
+            }
+        }
+  
+        document.getElementById("container").appendChild(tg);
+       
+    }
+    </script>
+
+    <h2>텍스트가 없는 단일 태그생성하기</h2>
+    <p>
+        img,audio,video,input태그
+        단일 태그들은 속성을 설정해야함. => documnet객체의 setAttribute()매소드를 이용해서
+        설정할 수 있다.
+    </p>
+    <div id="container2"></div>
+    <button onclick="newImg();">이미지 생성하기</button>
+    <button onclick="newInput();">input생성하기</button>
+    <script>
+        const counting=()=>{
+            let count=0;
+            return ()=>{
+                const input=document.createElement("input");
+                input.setAttribute("type","text");
+                input.setAttribute("name",`new${count++}`);
+                input.setAttribute("placeholder","아무거나입력");
+                document.getElementById("container2").appendChild(input);
+            }
+        }
+        const newInput=counting();
+        //이렇게 하면 두번해야 되니까 귀찮아서 스스로 함수 로 실행 시킴.
+        const newImg=()=>{
+            const img=document.createElement("img");
+            console.log(img);
+            img.setAttribute("src","https://i1.sndcdn.com/artworks-000104093542-vt5nma-t500x500.jpg");
+            img.setAttribute("width","100");
+            img.setAttribute("height","100");
+            //이건 메소드로 접근
+            img.style.width="300px";
+            img.style.height="300px"; 
+            //.style 로 하면 css 로 적용한것
+            img.height="200";
+            img.width="200";
+            //이건 직접 접근         
+            console.log(img);
+            console.dir(img);
+            document.getElementById("container2").appendChild(img);
+        }
+
+        // const newInput=(()=>{
+        //     let count=0;//클로저 이용
+        //     return()=>{
+        //     const input=document.createElement("input");
+        //     input.setAttribute("type","text");
+        //     input.setAttribute("name",`new${count++}`);
+        //     document.getElementById("container2").appendChild(input);
+        // }
+        // })();
+        //일회용이기 때문에 바로 작동 되게 함.. 스스로 실행함수
+    </script>
+    <img src="https://i1.sndcdn.com/artworks-000104093542-vt5nma-t500x500.jpg" alt=""
+    height="200" width="200">
+    <img id="target" src="https://i1.sndcdn.com/artworks-000104093542-vt5nma-t500x500.jpg" alt="">
+
+    <style>
+        #target{
+            width:200px;
+            height:300px;
+        }
+    </style>
+
+    <h2>생성된 태그안에 다른 생성된 태그가 들어가는 태그</h2>
+    <p>
+        목록태그, 테이블 태그, div안 태그 넣기
+    </p>
+    <h4>목록태그 만들어 추가하기</h4>
+    <div id="container3"></div>
+    <button onclick="createList();">목록생성</button>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+    <script>
+        const createList=()=>{
+            const ul=document.createElement("ul");
+            // let li=document.createElement("li");
+            // //Element , java로 쳤을 때 new 클래스명,new 클래스명,new 클래스명 계속하는것
+            // li.innerText="1";
+            // let li2=document.createElement("li");
+            // li2.innerText="2";
+            // let li3=document.createElement("li")
+            // li3.innerText="3";
+            // ul.appendChild(li);
+            // ul.appendChild(li2);
+            // ul.appendChild(li3);
+            // document.getElementById("container3").appendChild(ul);
+            for(let i=0;i<4;i++){
+                 let li=document.createElement("li");
+                 let txt=document.createTextNode(i+1);
+                 li.appendChild(txt);
+                 ul.appendChild(li);
+            }
+            document.getElementById("container3").appendChild(ul);
+        }
+    </script>
+
+    <!-- input 태그에 , 로 구분해서 저녁메뉴를 받은 다음 
+    그 값을 ul 태그로 출력하기-->
+    <div id="createTest"></div>
+    <input type="text" id="dinner">
+    <button onclick="dinnerMenu();">저녁 메뉴 만들기</button>
+    <script>
+       const dinnerMenu=()=>{ 
+          const ul1=document.createElement("ul");
+          let val=document.getElementById("dinner").value.split(",");
+        //   for(let i=0;i<val.length;i++){
+        //     let li=document.createElement("li");
+        //     let txt=document.createTextNode(val[i]);
+        //     li.appendChild(txt);
+        //     ul1.appendChild(li);
+        //   }
+        val.forEach((v,i)=>{
+            let li=document.createElement("li");
+             li.innerText=v;
+           ul1.appendChild(li);
+        })
+          document.getElementById("createTest").appendChild(ul1);
+        }
+    </script>
+
+    <h3>테이블 만들기</h3>
+    <p>버튼을 누르면 5*5테이블 만들기</p>
+    <p>사용자가 입력한 값을 기준으로 테이블 만들기</p>
+    
+    <button onclick="createTable();">5*5테이블 만들기</button><br>
+    <input
+    <button onclick="customTable();">커스텀 5*5테이블 만들기</button>
+    <div id="table"></div>
+    <script>
+        createTable=(()=>{
+            let count=1;
+        return()=>{ 
+            count=1;
+            const table=document.createElement("table");
+            for(let i=0;i<5;i++){
+                let tr=document.createElement("tr");
+                for(let j=0;j<5;j++){
+                    let td=document.createElement("td");
+                    let txt=document.createTextNode(count++);
+                    td.style.border="1px solid black";
+                    td.appendChild(txt);
+                    tr.appendChild(td);
+                }
+                table.appendChild(tr);
+            }
+            
+            table.style.border="1px solid black";
+            document.getElementById("table").appendChild(table);
+        }
+        })();
+    </script>
+    <fieldset>
+        <legend>첨부파일</legend>
+       <p> <button onclick="addFile();"> 추가</button> *첨부파일은 5개까지만 추가가능</p>
+        <p><input type="file" name="upload"></p>
+    </fieldset>
+    <script>
+        const addFile=()=>{
+            let count=document.querySelectorAll("[type=file]").length;
+            if(count<5){
+            let p=document.createElement("p");
+            let input=document.createElement("input");
+            input.setAttribute("type","file");
+            input.setAttribute("name","upload");
+            p.appendChild(input)
+            document.getElementsByTagName("fieldset")[0].appendChild(p);
+        }else{
+            alert("5까지밖에 못함");
+        }
+        }
+    </script>
+
+    <h2>생성된 태그를 원하는 위치에 넣기</h2>
+    <p>
+        insertAdjacentElement("예약어(속성값)",생성된 태그)
+        <br>
+        속성값<br>
+        beforebegin: 지정태그의 앞에(같은레밸)
+        afterend: 지정태그의 뒤에(같은레밸)
+        beforeend: 지정태그의 맨밑자식(appendChild와 동일)
+        afterbegin: 지정태그의 맨위 자식
+    </p>
+    
+    <button onclick="beforeendTest();">맨마지막 자식</button>
+    <button onclick="afterBeginTest();">맨처음 자식</button>
+    <button onclick="beforebeginTest();">지정태그 바로 위에</button>
+    <button onclick="afterendTest();">지정태그 뒤에</button>
+    <button onclick="move();">태그 이동시키기</button>
+    <br>
+
+    <div id="childTest">
+        <h2>기준태그</h2>
+    </div>
+    <p>
+        html페이지에 이미 존재하고 있는 태그를 선택해서 insertAdjacentElement()/appendChild()
+        를 이용하면 그 태그의 위치가 변경된다.
+    </p>
+
+    <script>
+        const move=()=>{
+            let target=document.getElementById("childTest"); 
+            let h2=document.querySelector("#childTest>h2");
+            target.insertAdjacentElement("beforebegin",h2);
+        }
+
+        const afterendTest=()=>{
+            let target=document.getElementById("childTest"); 
+            let mark=document.createElement("mark");
+            mark.innerText="집가고싶다";
+            target.insertAdjacentElement("afterend",mark);
+        }
+        const beforebeginTest=()=>{
+            let target=document.getElementById("childTest"); 
+            let mark=document.createElement("mark");
+            mark.innerText="집가고싶다";
+            target.insertAdjacentElement("beforebegin",mark);
+
+        
+        }
+        const afterBeginTest=()=>{
+            let target=document.getElementById("childTest");
+            let p=document.createElement("p");
+            p.innerText="추가되는 p";
+            target.insertAdjacentElement("afterbegin",p);
+        }
+        const beforeendTest=()=>{
+            let target=document.getElementById("childTest");
+            let p=document.createElement("p");
+            p.innerText="추가되는 p";
+            target.insertAdjacentElement("beforeend",p);
+        }
+    </script>
+    <style>
+        mark{
+            display: block;
+            background-color:bisque;
+        }
+        #childTest{
+            border:1px solid green;
+            width:400px;
+            height:500px;
+        }
+    </style>
+    
+    <h2>생성된 태그 style 속성 설정하기</h2>
+    <p>
+        생성된 태그 객체에 style property를 잉용해서 태그의 css 속성을 변경할 수 있다.
+        Element 객체의 property는 직접접근이 가능하기 때문이다.
+        1.Element.style.css속성명=속성값
+        2.setAttribute("style",";;;");
+        *css속성에는 -가 있음: background-color -> backgroundColor / fontSize... - 는 대문자로
+        자바 스크립트에서는 안쓰기 때문
+    </p>
+    <button onclick="styleChange(this);">스타일 변경하기</button>
+    <script>
+        const styleChange=(e)=>{
+            let img=document.createElement("img");
+            img.src="https://i1.sndcdn.com/artworks-000104093542-vt5nma-t500x500.jpg";
+            //style설정하기
+            // img.style.width="200px";
+            // img.style.height="200px";
+            // img.style.borderRadius="100px";
+            img.setAttribute("style","width:100px;height:100px;border-radius:100px;");
+            //setAttribute 에서는 속성 값 추가라 css 방식대로 감 '-' 씀
+            e.insertAdjacentElement("afterend",img);
+        }
+    </script>
+
+    <h2>특정태그에서 원하는 태그 검색하기(순회)</h2>
+    <p>
+        특정태그를 가져와 그 태그가 가지고 있는 자식 태그, 형제태그, 부모태그 확인하는 Element속성
+        children속성: 지정된 태그가 가지고있는 자식 태그들
+        parentElement속성: 지정된 태그의 바로 위 부모 태그
+        previousElementSibling속성 : 지정된 태그의 바로 위 태그(같은 레밸) 
+        nextElementSibling속성 : 지정된 태그의 바로 아래 태그(같은레밸)
+        *여러번 이어서 사용이 가능
+    </p>
+    <button onclick="searchElement(this);">태그검색하기</button>
+    <div id="searchTag">
+        <table>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+            </tr>
+        </table>
+        <ul>
+            <li>html</li>
+            <li>css</li>
+            <li>javascript</li>
+            <li>jquery</li>
+        </ul>
+    </div>
+
+
+    <script>
+        const searchElement=()=>{
+            //자식 태그 확인하기
+            let target=document.getElementById("searchTag");
+            console.dir(target);
+            console.log(target.children);//자손 까지만 가능, 후손은 안됌
+            //.children 하면 target 의 자손들로 이루어진 배열 이 생성
+            //0: table, 1: ul
+            console.log(target.children[1].children);
+            //부모객체 찾기
+            // console.log(target.parentElement);
+            console.log(target.parentElement.parentElement);
+
+            //형제찾기 같은레밸
+            console.log(target.nextElementSibling.nextElementSibling);
+            //이러면 다음에 뭐 없으니까 null
+            //.innerHTML->내용 가져옴);
+            //타겟이 searchTag div 고 그 다음이 script 니까 script 가 나옴
+        
+            console.log(target.previousElementSibling);
+            //앞에꺼 -> button
+        
+        }
+    </script>
+    <table>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td><button class="add">행추가</button></td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td><button class="add">행추가</button></td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td><button class="add">행추가</button></td>
+        </tr>
+    </table>
+    <script>
+        let e=document.getElementsByClassName("add");
+        for(let i=0;i<e.length;i++){
+            e[i].addEventListener("click",(e)=>{
+                let tr=document.createElement("tr");
+                for(let j=0;j<3;j++){
+                    let td=document.createElement("td");
+                    td.innerText=(j+1);
+                    tr.appendChild(td);
+                }
+                e.target.parentElement.parentElement.insertAdjacentElement("afterend",tr);
+                //이벤트가 발생된 태그
+            });
+        }
+
+
+    </script>
+
+    <script>
+        [1,2,3,4,5].filter((a,b,c)=>{
+            console.log(a);
+        })
+    </script>
+</body>
+</html>
