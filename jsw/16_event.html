@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 활용</title>
+</head>
+<body>
+    <h2>이벤트 속성 알아보기</h2>
+    <dl>
+        <dt>input태그 관련 이벤트</dt>
+        <dd>focus : input태그에 focus되었을 때 발생
+            ex)눌렀을 때깜빡이는 거 같은거
+        *blur 발생 후 focus 됨
+        </dd>
+        <dd>blur: input태그에 focus가 사라졌을 때 발생</dd>
+        <dd>change: input태그의 value 속성이 변경되었을 때 발생 *select태그에 이벤트로 많이 사용</dd>
+        <dd>submit: input 태그의 submit 타입을 클릭했을 때 발생 *기본으로 이벤트가 설정되어있음</dd>
+        <dd>reset: input태그의 reset타입을 클릭햇을 때 발생</dd>
+    </dl>
+    <dl>
+        <dt>mouse 관련 이벤트</dt>
+    <dd>click: 마우스 좌 클릭했을 때 발생</dd>
+    <dd>dblclick: 마우스 더블 클릭했을 때 발생</dd>
+    <dd>mouseenter: 마우스(마우스포인터)가 지정된 영역에 들어왔을 때</dd>
+    <dd>mouseleave: 마우스(마우스포인터)가 지정된 영역을 벗어났을 때 발생</dd>
+</dl> 
+
+<dl>
+    <dt>key 관련 이벤트</dt>
+    <dd>keyup: 키가 올라왔을때</dd>
+    <dd>keydown: 키가 내려갔을 때</dd>
+    <dd>keypress: 키가 눌렸을 때</dd>
+</dl>
+
+<dl>
+    <dt>윈도우 이벤트</dt>
+    <dd>load: 페이지의 태그들을 모두 읽고난 후 발생</dd>
+    <dd> resize: 윈도우 크기가 조정됐을때 발생</dd>
+    <dd>scroll: 창에서 스크롤이 조정됐을 때 발생</dd>
+</dl>
+
+<h2>고전이벤트 처리방식</h2>
+<p>
+    태그에 잇는 속성값에 직접 이벤트핸들러(함수) 대입함
+    태그의 속성명: on 이벤트 속성명
+</p>
+<div>
+    <h3>클릭하면 변경</h3>
+    <h3>마우스 올라오면 변경</h3>
+    <h3>마우스 나가면 변경</h3>
+</div>
+<script>
+    let h3=document.querySelectorAll("div>h3");
+    h3[0].onclick=function(){
+        this.style.fontSize="30px";
+    }
+    h3[1].onmouseenter=function(){
+        this.style.backgroundColor="lime";
+        //padding 부터 먹음
+    }
+    h3[2].onmouseleave=function(){
+        this.style.color="magenta";
+    }
+</script>
+
+<h2>인라인 방식</h2>
+<p class="inlineEvent" ondblclick="alert('더블더블')";>인라인 방식의 이벤트 처리하기</p>
+
+<h2>표준 방식 이벤트 처리하기</h2>
+<p>
+    addEventListener()함수를 이용해서 이벤트핸들러를 등록하는 것
+    addEventListener("이벤트 속성명",이벤트핸들러 등록(익명함수));
+    *이벤트 속성명에 on 사용하지 않음-> click,mouseenter..
+    *이벤트핸들러 함수에 매개변수도 Event객체를 넣어줌 -> e(이벤트 객체).target
+</p>
+<form action="">
+    <input type="text" name="userId" id="userId"><br>
+    <input type="password" id="password" name="password"><br>
+    <input type="password" id="pwck"><span id="result"></span><br>
+    <select name="title" id="title">
+        <option value="서울">서울</option>
+        <option value="대전">대전</option>
+        <option value="대구">대구</option>
+        <option value="부산">부산</option>
+    </select>
+</form>
+<script>
+    //표준이벤트 방식으로 이벤트 input이벤트 설정하기
+    let userId=document.getElementById("userId");
+    let pw=document.getElementById("password");
+    let pwck=document.getElementById("pwck");
+    let title=document.getElementById("title");
+
+    userId.addEventListener("focus",function(e){
+        console.log(e);//이벹트객체를 매개변수로 넣어줌(v8);
+        this.style.backgroundColor="coral";
+        this.style.color="white";
+        //focus한 순간 element 값을 바꿔버려서 나가도 유지됨
+    });
+    userId.addEventListener("blur",(e)=>{
+        //this.styel... ->화살표 함수에서는 this: 윈도우객체
+        e.target.style.backgroundColor="white";
+        e.target.style.color="black";
+    });
+    title.addEventListener("change",function(){
+        // alert(`select선택!${this.value}`);
+        userId.value=this.value;
+    });
+    userId.addEventListener("change",function(){
+        //input 에서 change 가 먹는 경우는 자기가 focus되고 자기자신 말고 다른게 focus 될때 먹음.
+        alert(this.value);
+    })
+    //input 키보드로 입력받음
+    pwck.addEventListener("keyup",function(e){
+        console.log(e);
+        if(this.value.length>4){
+            if(this.value==pw.value){
+                this.nextElementSibling.innerText="비밀번호가 일치합니다.";
+                this.nextElementSibling.style.color="green";
+            }else{
+                this.nextElementSibling.innerText="비밀번호가 불일치합니다.";
+                this.nextElementSibling.style.color="red";
+            }
+        }
+    })
+    userId.addEventListener("keyup",function(e){
+        console.log(e.target.value);
+    })
+</script>
+
+<h2>마우스 이벤트</h2>
+<button id="btn">버튼이벤트</button>
+<div></div>
+<script>
+    let btn=document.getElementById("btn");
+    btn.addEventListener("dblclick",function(e){
+        console.log(arguments);
+        //익명함수는 arguments 못 받음
+
+        let h2=document.createElement("h2");
+        h2.innerText="더블클릭";
+        this.nextElementSibling.appendChild(h2);
+    })
+</script>
+
+<h2>윈도우에 이벤트 설정하기</h2>
+<script>
+    window.addEventListener("resize",function(e){
+        // console.log(e);
+        //변경된 window크기확인
+        console.log(e.target.innerWidth,e.target.innerHeight);
+    });
+
+    window.addEventListener("scroll",function(e){
+        console.log(window.scrollX,this.scrollY);
+    })
+</script>
+
+<h3>생성된 태그에 이벤트 설정하기</h3>
+<p>
+    생성된 태그에 이벤트를 설정하는 방법은?
+    createElement().addEventListener로 이벤트 핸들러 연결하면됨.
+</p>
+<button onclick="addEvent();">이벤트가 설정된 태그</button>
+<div id="eventContainer"></div>
+<script>
+    const addEvent=()=>{
+        let img=document.createElement("img");
+        img.style.width="200px";
+        img.style.height="200px";
+        img.src="https://cdn.imweb.me/upload/S202002259d2c4f16c33cd/43066e80b5790.jpg";
+        //생성된 태그에 이벤트 설정하기
+        img.addEventListener("click",function(e){
+            this.style.border="3px dotted magenta";
+            this.style.boxShadow="3px 3px 5px yellow";
+            this.style.borderRadius="100px";
+        });
+        document.getElementById("eventContainer").appendChild(img);
+    }
+</script>
+
+5*5테이블을 생성하고, 테이블의 마지막열에는 버튼태그를 추가할것
+그 버튼태그를 클릭하면 클릭한 그 행의 배경색이 gold로 변경
+
+<button id="createTable">테이블 생성</button>
+<div id="tableContainer"></div>
+<script>
+    let btn1=document.getElementById("createTable");
+    btn1.addEventListener("click",function(e){
+        let table=document.createElement("table");
+        for(let i=0;i<5;i++){
+            let tr=document.createElement("tr");
+            for(let j=0;j<5;j++){
+                let td=document.createElement("td");
+               if(j<4){ td.innerText=j+1;
+            }else{
+                let button=document.createElement("button");
+            button.innerText="색변환";
+            button.addEventListener("click",function(e){
+           e.target.parentElement.parentElement.style.backgroundColor="gold";
+            });
+            td.appendChild(button);
+            }
+                td.style.border="1px solid black";
+                tr.appendChild(td);
+            }
+            table.style.border="1px solid black";
+            table.style.borderCollapse="collapse";
+            table.appendChild(tr);
+        }
+        
+        document.getElementById("tableContainer").appendChild(table);
+    });
+</script>
+
+<h1>기본으로 설정된 이벤트 차단하기</h1>
+<p>
+    a: 클릭시 페이지 이동함
+    input type=submit: 클릭시 데이터 전송
+</p>
+<a href="http://www.naver.com" onclick="stopMove(event);">네이버</a>
+<a id="check" href="http://www.iei.or.kr">kh정보교육원</a>
+<!-- (evenet)라고 해야함 -->
+<script>
+    document.getElementById("check").addEventListener("click",(e)=>{
+        e.preventDefault();
+    })
+
+    const stopMove=(e)=>{
+        //console.log(e);
+        //기본이벤트 차단하려면 prventDefault(); 사용
+        e.preventDefault();
+    }
+</script>
+<form action="">
+    <input type="text" name="userId">
+    <input type="password" name="password">
+    <input type="submit" value="로그인" onclick="return checkData();">
+</form>
+<script>
+    //submit에 click이벤트의 반환값이 false 이면 데이터를 전송하지 않음
+    const checkData=()=>{ 
+        let userId=document.querySelectorAll("[name=userId]")[1];
+        if(userId.value.length<4){
+            alert("아이디는 4글자 이상 입력하세요")
+            userId.value="";
+            userId.focus();
+            return false;
+        }
+
+    }
+</script>
+</body>
+</html>
