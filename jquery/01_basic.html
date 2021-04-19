@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery 작성하기</title>
+    <!-- <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>
+        //ready함수를 적용하는 방법
+        //onload 처럼 다른 것들 이 모두 다 로드된 후 적용 됨, 그런데 onload와 다르게 복수적용됨
+        $(document).ready(function(){
+            $("p").css("backgroundColor","yellow");
+        });
+        $(document).ready(function(){
+            $("h1").css("backgroundColor","green");
+        });
+        //짧게쓰고 많은 일을 하자!
+        $(function(){
+            $("h2+p").css("textShadow", "3px 3px 5px red");
+        });
+        $(()=>{
+            $("h2").css("backgroundColor","purple");
+        })
+
+    </script>
+</head>
+<body>
+    <h1>jQuery 적용하기</h1>
+    <p>
+        jQuery 를 적용하는 방법에는 두가지가 있음<br>
+        1.CDN 방식: http 통신으로 파일을 제공하는 서버에서 받아오는 것<br>
+        2.파일다운로드: 정해진 경로에 js파일 단해서 불러오는 것<br>
+    </p>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <script>
+        $("p").css("color","red");
+    </script>
+    <h2>jqeury활용 방식</h2>
+    <p>
+        jquery를 이용하려면 주로 onload와 비슷한 속성인 ready() 함수안에 넣어서
+        이용함.
+
+    </p>
+
+    <h2>jqeury사용문버(DOM)</h2>
+    <p>
+        $("선택자").jquery함수명(매개변수);
+        jQuery("선택자").jqeury함수명(매개변수);
+        jQuery는 chaining
+        $("선택자").jquery함수명(매개변수).jquery함수 함수명().jquery함수명()...;
+    </p>
+    <p>
+        Element를 가져오는 방법<br>
+        $("tjsxorwk")||jQuery("선택자") =>jquery방식의 element를 불러옴.
+    </p>
+    <p id="jq">p1</p>
+    <p id="jq">p2</p>
+    <p>p3</p>
+    <ul class="target">
+        <li>html</li>
+        <li>css</li>
+        <li>javascript</li>
+        <li>jquery</li>
+    </ul>
+    <button onclick="checkElement();">Element객체 확인</button>
+    <script>
+        const checkElement=()=>{
+            //jQuery방식으로 element불러오기
+            //id불러오기
+            console.log($("#jq"));
+            $("#jq").css("backgroundColor","lime");
+            //js방식으로 element를 불러오기
+            console.log(document.getElementById("jq"));
+            // document.getElementById("jq").css("color","magenta");
+            //jquery 껀 그냥은 자바스크립트에서 못씀 
+            $(document.getElementById("jq")).css("color","magenta");
+            //요래해주면 사용 가능
+
+            //다수의 Element를 가지고있을 때는 인덱스 번호로 접근 가능함.
+            //인덱스 번호로 접근했을때는 jsElement로 가져온것으로 jquery 함수를 사용할 수 없음.
+            console.log($("li"));
+            console.log($("li")[0]);
+            console.log($("li")[1]);
+            //얘네 콘솔에 찍어보면 js 방식으로 찍힘 js 임 jq쓰려면 그걸로 바꿔야함
+
+            //jquery방식으로 다수의 값을 가져와 함수를 적용하면 가져온
+            //  Element모두가 적용됨 (자동으로 for문을 실행해서 다 적용 시킴)
+            $("li").css("fontSize","30px");
+            
+            let lis=document.querySelectorAll("li");
+            console.log(lis);//이건 nodeelist 그냥 리스트가 각자에 적용하려면 인덱스로 해서 접근해야함
+            //즉 for문 돌려야된다는 것
+            for(let i=0;i<lis.length;i++){
+                lis[i].style.color="green";
+            }
+
+        }
+    </script>
+</body>
+</html>
