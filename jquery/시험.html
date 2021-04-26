@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        const copy=()=>{
+            let div=$("<div class='a'>");
+            let button1=$(" <button onclick='copy();'>복사하기</button>");
+            let button2=$("  <button onclick='remove()'>삭제하기</button>")
+            div.append(button1,button2);
+            $("#container").after(div);
+            
+
+        }
+
+        const remove=()=>{
+           $("div.a").last().remove();
+         
+       
+        }
+
+        
+    </script>
+</head>
+<body>
+    <div class="a" id="container">
+        <button onclick="copy();">복사하기</button>
+        <button onclick="remove()">삭제하기</button>
+        
+    </div>
+    <div></div>
+        
+ 
+    </script>
+    <style>
+        div.a{
+        width:200px;
+        height:200px;
+        background-color: orangered;    
+        }
+    </style>
+
+
+</body>
+</html>
